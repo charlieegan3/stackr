@@ -1,5 +1,5 @@
 require "sinatra"
-require "gcloud"
+require "google/cloud/storage"
 require "digest"
 
 set :bind, "0.0.0.0"
@@ -18,7 +18,7 @@ post "/" do
 
   name = "video_#{Digest::MD5.hexdigest(params["myfile"][:filename] + Time.now.to_s)}.mp4"
 
-  Gcloud.new.storage.bucket(bucket).create_file(params["myfile"][:tempfile], name)
+  Google::Cloud::Storage.new.bucket(bucket).create_file(params["myfile"][:tempfile], name)
   @url = "https://storage.googleapis.com/#{bucket}/#{name}"
 
   `echo $HYPER_JSON > /tmp/config.json`
