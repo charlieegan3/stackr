@@ -52,3 +52,9 @@ fi
 
 echo $GOOGLE_CLOUD_KEYFILE_JSON > /tmp/account.json && gcloud auth activate-service-account --key-file /tmp/account.json
 gsutil -m cp stacked.jpg "gs://$GOOGLE_CLOUD_BUCKET/stacked_$TIME.jpg"
+gsutil rm "gs://$GOOGLE_CLOUD_BUCKET/video_$TIME.mp4"
+
+curl -s --form-string "token=$PUSHOVER_TOKEN" \
+		--form-string "user=$PUSHOVER_USER" \
+		--form-string "message=https://storage.googleapis.com/$GOOGLE_CLOUD_BUCKET/stacked_$TIME.jpg" \
+		https://api.pushover.net/1/messages.json
