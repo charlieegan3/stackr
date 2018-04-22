@@ -4,6 +4,10 @@ require "digest"
 
 set :bind, "0.0.0.0"
 
+use Rack::Auth::Basic, "Restricted Area" do |username, password|
+  username == ENV.fetch("WEB_USER") and password == ENV.fetch("WEB_PASSWORD")
+end
+
 get "/" do
   erb :upload
 end
