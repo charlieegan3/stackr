@@ -24,9 +24,16 @@ else
 fi
 
 if [[ $ALIGN ]]; then
-	echo "ALIGN :" $ALIGN
+	echo "ALIGN:" $ALIGN
 else
 	echo "ALIGN missing"
+	exit 1
+fi
+
+if [[ $TIME ]]; then
+	echo "TIME:" $TIME
+else
+	echo "TIME missing"
 	exit 1
 fi
 
@@ -43,9 +50,5 @@ else
 	convert frame_* -evaluate-sequence $MODE stacked.jpg
 fi
 
-hash=$(md5sum stacked.jpg | awk '{print $1}')
-echo $GOOGLE_CLOUD_KEYFILE_JSON
 echo $GOOGLE_CLOUD_KEYFILE_JSON > /tmp/account.json && gcloud auth activate-service-account --key-file /tmp/account.json
-echo "gs://$GOOGLE_CLOUD_BUCKET/stacked_$hash.jpg"
-gsutil -m cp stacked.jpg "gs://$GOOGLE_CLOUD_BUCKET/stacked_$hash.jpg"
-echo "https://storage.googleapis.com/$GOOGLE_CLOUD_BUCKET/stacked_$hash.jpg"
+gsutil -m cp stacked.jpg "gs://$GOOGLE_CLOUD_BUCKET/stacked_$TIME.jpg"
