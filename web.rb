@@ -1,19 +1,21 @@
-require 'sinatra'
+require "sinatra"
 require "gcloud"
+require "digest"
 
-set :bind, '0.0.0.0'
+set :bind, "0.0.0.0"
 
-get '/' do
+get "/" do
   erb :upload
 end
 
 post "/" do
-  gcloud = Gcloud.new
-  storage = gcloud.storage
+  return "not video" unless params["myfile"][:filename].include?("mp4")
+  bucket = ENV.fetch("GOOGLE_CLOUD_BUCKET")
 
-  bucket = storage.bucket ENV.fetch("GOOGLE_CLOUD_BUCKET")
+  name = "video_#{Digest::MD5.hexdigest(params["myfile"][:filename] + Time.now.to_s)}.mp4"
 
-  bucket.create_file params['myfile'][:tempfile], params['myfile'][:filename]
+  Gcloud.new.storage.bucket(bucket).create_file(params["myfile"][:tempfile], name)
 
-  return "The file was successfully uploaded!"
+  @url = "https://storage.googleapis.com/#{bucket}/#{name}"
+  erb :result
 end
