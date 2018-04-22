@@ -22,7 +22,7 @@ post "/" do
   @url = "https://storage.googleapis.com/#{bucket}/#{name}"
 
   `echo $HYPER_JSON > /tmp/config.json`
-  pid = Process.spawn("./bin/hyper --config /tmp/ run --size m3 --rm -e VIDEO_URL=#{@url} -e FPS=1 -e ALIGN=false -e MODE=median -e GOOGLE_CLOUD_KEYFILE_JSON='#{ENV.fetch("GOOGLE_CLOUD_KEYFILE_JSON")}' -e GOOGLE_CLOUD_PROJECT='#{ENV.fetch("GOOGLE_CLOUD_PROJECT")}' -e GOOGLE_CLOUD_BUCKET='#{ENV.fetch("GOOGLE_CLOUD_BUCKET")}' charlieegan3/stackr:#{ENV.fetch("IMAGE_TAG")}")
+  pid = Process.spawn("./bin/hyper --config /tmp/ run --size m3 --rm -e VIDEO_URL=#{@url} -e FPS=#{params["fps"]} -e ALIGN=#{params["align"]} -e MODE=#{params["mode"]} -e GOOGLE_CLOUD_KEYFILE_JSON='#{ENV.fetch("GOOGLE_CLOUD_KEYFILE_JSON")}' -e GOOGLE_CLOUD_PROJECT='#{ENV.fetch("GOOGLE_CLOUD_PROJECT")}' -e GOOGLE_CLOUD_BUCKET='#{ENV.fetch("GOOGLE_CLOUD_BUCKET")}' charlieegan3/stackr:#{ENV.fetch("IMAGE_TAG")}")
   Process.detach(pid)
 
   erb :result
