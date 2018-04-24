@@ -15,10 +15,15 @@ get "/" do
 end
 
 post "/" do
+  return "missing video" if params["myfile"] == nil
   return "not video" unless params["myfile"][:filename].include?("mp4")
+  return "invalid FPS" unless params["fps"].to_i.between?(1, 10)
+  return "invalid align" unless %(true false).include?(params["align"])
+  return "invalid mode" unless %(min max mean median).include?(params["mode"])
+
   bucket = ENV.fetch("GOOGLE_CLOUD_BUCKET")
 
-  time = Time.now.strftime("%Y-%m-%d-%H%M%S")
+  time = Time.now.strftime("%Y-%m-%d-%H%M%S") + Digest::SHA256.hexdigest(params.to_s)
   name = "video_#{time}.mp4"
 
   Google::Cloud::Storage.new.bucket(bucket).create_file(params["myfile"][:tempfile], name)
