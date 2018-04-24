@@ -4,8 +4,10 @@ require "digest"
 
 set :bind, "0.0.0.0"
 
-use Rack::Auth::Basic, "Restricted Area" do |username, password|
-  username == ENV.fetch("WEB_USER") and password == ENV.fetch("WEB_PASSWORD")
+if ENV.fetch("WEB_USER", nil) != nil
+  use Rack::Auth::Basic, "Restricted Area" do |username, password|
+    username == ENV.fetch("WEB_USER") and password == ENV.fetch("WEB_PASSWORD")
+  end
 end
 
 get "/" do
