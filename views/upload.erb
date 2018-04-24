@@ -1,46 +1,59 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.9.1/tachyons.min.css" />
     <style>
-      input {
-        width: 100%;
+      .gugi {
+        font-family: 'Gugi', monospace;
       }
     </style>
   </head>
   <body>
-    <form method="post" enctype="multipart/form-data">
-      <input type="file" name="myfile"/>
-      <br/>
-      <br/>
-      <select name="mode">
-        <option value="mean">Mean</option>
-        <option value="median">Median</option>
-        <option value="max">Max</option>
-        <option value="min">Min</option>
-      </select>
-      <br/>
-      <br/>
-      <select name="align">
-        <option value="true">Align</option>
-        <option value="false">No Align</option>
-      </select>
-      <br/>
-      <br/>
-      <select name="fps">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
-      <br/>
-      <br/>
-      <input type="submit" value="Upload!"/>
-    </form>
+    <div class="mw6 center">
+      <h1 class="gugi light-red">stackr</h1>
+      <p>This app will turn videos into still images by aligning frames and combining them into an average image.</p>
+      <form method="post" enctype="multipart/form-data">
+        <p><strong>1.</strong> Choose a video to upload.
+        <p class="f6">I suggest no more than 10 seconds or 100mb if you want your image to
+        show up today. You might want to use a timelapse if you need a longer
+        period of motion.</p>
+        <input type="file" name="myfile" class="w-100"/>
+
+        <p><strong>2.</strong> Select how the pixels in the final image should be calculated.</p>
+        <p class="f6">Each pixel has 3 color values. Pixels are sorted on these and chosen based on the mode selected.</p>
+        <select name="mode">
+          <option value="mean">Mean</option>
+          <option value="median">Median</option>
+          <option value="max">Max</option>
+          <option value="min">Min</option>
+        </select>
+
+        <p><strong>3.</strong> Enable alignment</p>
+        <p class="f6">This is required unless the video was taken on a tripod. It also makes the process much slower.</p>
+        <select name="align">
+          <option value="true">Align</option>
+          <option value="false">No Align</option>
+        </select>
+
+        <p><strong>4.</strong> Choose a sample FPS (frames per secon) value</p>
+        <p class="f6">FFmpeg is going to turn your video into frames to stack them as images. How many frames should it select per second of video? More frames, more slow.</p>
+        <select name="fps">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+
+        <p><strong>5.</strong> Upload your video</p>
+        <input type="submit" value="Upload"/>
+      </form>
+    </div>
   </body>
 </html>

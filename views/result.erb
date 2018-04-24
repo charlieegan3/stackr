@@ -1,13 +1,19 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.9.1/tachyons.min.css" />
     <style>
+      .gugi {
+        font-family: 'Gugi', monospace;
+      }
     </style>
   </head>
   <body>
-    <a href="<%= @url %>"><%= @url %></a>
-    <br/>
-    <br/>
-    <a href="<%= @expected_image_url %>"><%= @expected_image_url %></a>
+    <div class="mw6 center">
+      <h1 class="gugi light-red">stackr</h1>
+      <p>Your picture will appear at this link shortly depending on the settings you chose.</p>
+      <a href="<%= @expected_image_url %>"><%= @expected_image_url %></a>
+    </div>
   </body>
 </html>
