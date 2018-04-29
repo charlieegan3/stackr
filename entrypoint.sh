@@ -44,7 +44,7 @@ curl -o video.mp4 $VIDEO_URL
 ffmpeg -i video.mp4 -r $FPS -f image2 frame_%07d.png
 
 if [ "$ALIGN" = true ] ; then
-	align_image_stack -m -a aligned_ frame_*
+	align_image_stack --corr 0.99 -a aligned_ frame_*
 	convert aligned_* -evaluate-sequence $MODE stacked.jpg
 else
 	convert frame_* -evaluate-sequence $MODE stacked.jpg

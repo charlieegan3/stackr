@@ -18,7 +18,7 @@ post "/" do
   return "too much file" if params["myfile"]["tempfile"].size > 200_000_000
   return "missing video" if params["myfile"] == nil
   return "not video" unless params["myfile"][:filename].include?("mp4")
-  return "invalid FPS" unless params["fps"].to_i.between?(1, 10)
+  return "invalid FPS" unless params["fps"].to_f.between?(0.25, 10)
   return "invalid align" unless %(true false).include?(params["align"])
   return "invalid mode" unless %(min max mean median).include?(params["mode"])
 
