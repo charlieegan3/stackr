@@ -5,9 +5,6 @@ and have them converted to stacked stills. This does things like even out water
 remove crowds of people and generally blur motion in shots. There are some
 examples in my post [here](https://charlieegan3.com/blog/2018/04/22/bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh).
 
-There is a preview environment
-[here](https://charlieegan3-stackr.herokuapp.com/) where you can try it out.
-
 The project was built to give me a Photoshop-like image stacking tool that I
 could use from my phone. It is built using the following tools and services:
 
