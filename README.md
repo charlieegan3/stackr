@@ -1,5 +1,9 @@
 # stackr
 
+**Note**: this project no longer works because of Hyper.sh stopping. I haven't
+had time to update it yet and there are many apps have since been released that
+do a similar thing... (e.g. Moment camera)
+
 This is a simple proof of concept project that allows users to upload videos
 and have them converted to stacked stills. This does things like even out water
 remove crowds of people and generally blur motion in shots. There are some
